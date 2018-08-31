@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,9 +39,11 @@ public class Product {
 	@Column
 	private int stock;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
 	private List<ProductDetail> productDetails;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
 	private List<Sale> sales;
 }
