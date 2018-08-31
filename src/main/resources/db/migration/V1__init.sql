@@ -8,7 +8,7 @@ CREATE TABLE products(
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE sale(
+CREATE TABLE sales(
   id bigint(20) NOT NULL AUTO_INCREMENT,
   discount_price int(6) NOT NULL,
   active tinyint(1) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE sale(
   FOREIGN KEY (product_id) REFERENCES products(id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE product_details (
+CREATE TABLE product_details(
   id bigint(20) NOT NULL AUTO_INCREMENT,
   expiration_date date NOT NULL,
   product_id bigint(20) NOT NULL,

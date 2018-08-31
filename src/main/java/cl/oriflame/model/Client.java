@@ -9,12 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="products")
+@Table(name="clients")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +30,7 @@ public class Client {
 	@Column
 	private String description;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="client", cascade=CascadeType.ALL)
 	private List<Order> orders;
 }

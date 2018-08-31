@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cl.oriflame.model.Product;
-import cl.oriflame.service.ProductService;
+import cl.oriflame.model.Client;
+import cl.oriflame.service.ClientService;
 
 @RestController
-@RequestMapping("/products")
-public class ProductController {
+@RequestMapping("/clients")
+public class ClientController {
 	@Autowired
-	private ProductService productService;
+	private ClientService clientService;
 	
-	@GetMapping("/find-all")
+	@GetMapping("find-all")
 	public ResponseEntity<?> findAll() {
-		List<Product> products = productService.findAll();
+		List<Client> clients = clientService.findAll();
 		
-		if(products == null)
+		if(clients == null)
 			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
 		
-		return new ResponseEntity<>(products,HttpStatus.OK);
+		return new ResponseEntity<>(clients,HttpStatus.OK);
 	}
 }
