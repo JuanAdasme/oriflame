@@ -14,7 +14,13 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 	@Autowired
 	private ProductDetailRepository productDetailRepository;
 	
+	@Override
 	public List<ProductDetail> findAll() {
 		return productDetailRepository.findAll();
+	}
+	
+	@Override
+	public ProductDetail save(ProductDetail productDetail) {
+		return productDetailRepository.save(productDetail);
 	}
 }

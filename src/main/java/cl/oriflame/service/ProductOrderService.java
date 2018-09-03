@@ -6,4 +6,6 @@ import cl.oriflame.model.ProductOrder;
 
 public interface ProductOrderService {
 	List<ProductOrder> findAll();
+	
+	ProductOrder save(ProductOrder productOrder);
 }

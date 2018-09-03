@@ -17,4 +17,26 @@ public class SaleServiceImpl implements SaleService {
 	public List<Sale> findAll() {
 		return saleRepository.findAll();
 	}
+	
+	public Sale save(Sale sale) {
+		return saleRepository.save(sale);
+	}
+	
+	public Sale setInactive(Integer id) {
+		Sale sale = saleRepository.findById(id)
+						.orElse(null);
+		if(sale == null)
+			return null;
+		sale.setActive(false);
+		return saleRepository.save(sale);
+	}
+	
+	public Sale setActive(Integer id) {
+		Sale sale = saleRepository.findById(id)
+						.orElse(null);
+		if(sale == null)
+			return null;
+		sale.setActive(true);
+		return saleRepository.save(sale);
+	}
 }

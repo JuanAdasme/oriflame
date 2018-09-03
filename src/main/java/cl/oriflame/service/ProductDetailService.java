@@ -6,4 +6,6 @@ import cl.oriflame.model.ProductDetail;
 
 public interface ProductDetailService {
 	List<ProductDetail> findAll();
+	
+	ProductDetail save(ProductDetail productDetail);
 }

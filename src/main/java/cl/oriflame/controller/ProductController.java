@@ -29,7 +29,7 @@ public class ProductController {
 		if(products == null)
 			return Utils.notFound();
 		
-		return new ResponseEntity<>(products,HttpStatus.OK);
+		return Utils.ok(products);
 	}
 	
 	@PostMapping("save")
@@ -38,12 +38,11 @@ public class ProductController {
 			return Utils.badRequest();
 		
 		try {
-			Product p = productService.save(product);
-			if(p == null)
-				return Utils.badRequest();
-			return new ResponseEntity<>(product,HttpStatus.OK);
+			productService.save(product);
+			return Utils.ok(product);
 		} catch (Exception e) {
-			return Utils.serverError();
+			System.out.println(String.format("Error: %s", e.getMessage()));
+			return Utils.badRequest();
 		}
 	}
 	
@@ -54,11 +53,9 @@ public class ProductController {
 		
 		try {
 			Product product = productService.setInactive(id);
-			if(product == null)
-				return Utils.badRequest();
-			return new ResponseEntity<>(product,HttpStatus.OK);
+			return Utils.ok(product);
 		} catch (Exception e) {
-			return Utils.serverError();
+			return Utils.badRequest();
 		}
 	}
 	
@@ -71,7 +68,7 @@ public class ProductController {
 			Product product = productService.setActive(id);
 			if(product == null)
 				return Utils.badRequest();
-			return new ResponseEntity<>(product,HttpStatus.OK);
+			return Utils.ok(product);
 		} catch (Exception e) {
 			return Utils.serverError();
 		}

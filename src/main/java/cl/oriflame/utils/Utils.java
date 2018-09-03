@@ -5,6 +5,10 @@ import org.springframework.http.ResponseEntity;
 
 public final class Utils {
 	
+	public static <T> ResponseEntity<?> ok(T response) {
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	
 	public static ResponseEntity<?> badRequest() {
 		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 	}
