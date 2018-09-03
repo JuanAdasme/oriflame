@@ -17,4 +17,27 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> findAll() {
 		return orderRepository.findAll();
 	}
+	
+	public Order save(Order order) {
+		return orderRepository.save(order);
+	}
+	
+	public Order setInactive(Integer id) {
+		Order order = orderRepository.findById(id)
+						.orElse(null);
+		if(order == null)
+			return null;
+		
+		order.setActive(false);
+		return orderRepository.save(order);
+	}
+	
+	public Order setActive(Integer id) {
+		Order order = orderRepository.findById(id)
+						.orElse(null);
+		if(order == null)
+			return null;
+		order.setActive(true);
+		return orderRepository.save(order);
+	}
 }
