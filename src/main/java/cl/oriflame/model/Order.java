@@ -34,6 +34,9 @@ public class Order {
 	@Column(name="client_id")
 	private Integer clientId;
 	
+	@Column
+	private boolean active;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="client_id", nullable=false, insertable=false, updatable=false)

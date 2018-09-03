@@ -8,4 +8,8 @@ public interface ProductService {
 	List<Product> findAll();
 	
 	Product save(Product product);
+	
+	Product setInactive(Integer id);
+	
+	Product setActive(Integer id);
 }

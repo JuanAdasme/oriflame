@@ -33,6 +33,9 @@ public class Client {
 	@Column
 	private String description;
 	
+	@Column
+	private boolean active;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="client", cascade=CascadeType.ALL)
 	private List<Order> orders;

@@ -42,6 +42,9 @@ public class Product {
 	@Column
 	private int stock;
 	
+	@Column
+	private boolean active;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
 	private List<ProductDetail> productDetails;

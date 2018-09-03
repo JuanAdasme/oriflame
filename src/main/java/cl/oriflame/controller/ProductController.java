@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.oriflame.model.Product;
 import cl.oriflame.service.ProductService;
+import cl.oriflame.utils.Utils;
 
 @RestController
 @RequestMapping("/products")
@@ -20,23 +22,58 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/find-all")
+	@GetMapping("find-all")
 	public ResponseEntity<?> findAll() {
 		List<Product> products = productService.findAll();
 		
 		if(products == null)
-			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+			return Utils.notFound();
 		
 		return new ResponseEntity<>(products,HttpStatus.OK);
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("save")
 	public ResponseEntity<?> save(@RequestBody Product product) {
-		Product prod = productService.save(product);
+		if(product == null)
+			return Utils.badRequest();
 		
-		if(prod == null)
-			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		try {
+			Product p = productService.save(product);
+			if(p == null)
+				return Utils.badRequest();
+			return new ResponseEntity<>(product,HttpStatus.OK);
+		} catch (Exception e) {
+			return Utils.serverError();
+		}
+	}
+	
+	@GetMapping("disable")
+	public ResponseEntity<?> setInactive(@RequestParam Integer id) {
+		if(id == null)
+			return Utils.badRequest();
 		
-		return new ResponseEntity<>(prod,HttpStatus.OK);
+		try {
+			Product product = productService.setInactive(id);
+			if(product == null)
+				return Utils.badRequest();
+			return new ResponseEntity<>(product,HttpStatus.OK);
+		} catch (Exception e) {
+			return Utils.serverError();
+		}
+	}
+	
+	@GetMapping("enable")
+	public ResponseEntity<?> setActive(@RequestParam Integer id) {
+		if(id == null)
+			return Utils.badRequest();
+		
+		try {
+			Product product = productService.setActive(id);
+			if(product == null)
+				return Utils.badRequest();
+			return new ResponseEntity<>(product,HttpStatus.OK);
+		} catch (Exception e) {
+			return Utils.serverError();
+		}
 	}
 }
